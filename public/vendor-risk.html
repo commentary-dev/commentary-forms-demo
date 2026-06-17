@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Vendor risk review form</title>
+    <style>
+      body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 880px; margin: 40px auto; padding: 0 20px; }
+      .risk-panel { border: 1px solid #d0d7de; padding: 16px; }
+      label { display: block; margin-top: 12px; font-weight: 600; }
+      input, select, textarea { display: block; width: 100%; margin-top: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Vendor risk review</h1>
+      <p>This static HTML report owns the layout while Commentary binds fields to a Form Contract.</p>
+      <form
+        class="risk-panel"
+        data-commentary-form="security-review"
+        data-commentary-form-src="../forms/security-review.form.yaml"
+        action="https://example.invalid/blocked"
+      >
+        <label for="projectName">Project name</label>
+        <input id="projectName" name="projectName" data-commentary-field="projectName" autocomplete="off">
+
+        <label for="ownerEmail">Owner email</label>
+        <input id="ownerEmail" name="ownerEmail" type="email" data-commentary-field="ownerEmail">
+
+        <label for="dataClassification">Data classification</label>
+        <select id="dataClassification" name="dataClassification" data-commentary-field="dataClassification">
+          <option value="">Choose classification</option>
+          <option value="public">Public</option>
+          <option value="internal">Internal</option>
+          <option value="confidential">Confidential</option>
+        </select>
+
+        <label>
+          <input name="handlesPii" type="checkbox" data-commentary-field="handlesPii">
+          Handles PII
+        </label>
+
+        <label for="piiDetails">PII details</label>
+        <textarea
+          id="piiDetails"
+          name="piiDetails"
+          data-commentary-field="piiDetails"
+          data-commentary-visible-when='{"equals":[{"var":"handlesPii"},true]}'
+        ></textarea>
+
+        <button type="submit" onclick="window.__blockedInlineHandler = true">Submit security review</button>
+      </form>
+      <script>window.__blockedScript = true;</script>
+    </main>
+  </body>
+</html>
+

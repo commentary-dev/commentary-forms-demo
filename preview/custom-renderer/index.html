@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Commentary Forms custom renderer demo</title>
+    <script src="https://cdn.commentary.dev/review-sdk/latest/commentary-review-sdk.js"></script>
+    <style>
+      body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 760px; margin: 40px auto; padding: 0 20px; }
+      label { display: block; margin-top: 12px; font-weight: 600; }
+      input, select, textarea { display: block; width: 100%; margin-top: 4px; }
+    </style>
+  </head>
+  <body>
+    <main data-commentary-id="FormsDemo.customRenderer">
+      <h1>Custom renderer form bridge</h1>
+      <p>This page owns its UI and submits structured values through the Commentary Review SDK.</p>
+      <form data-custom-renderer-form="true">
+        <label>
+          Reviewer name
+          <input name="reviewerName" autocomplete="name">
+        </label>
+        <label>
+          Reviewer email
+          <input name="reviewerEmail" type="email" autocomplete="email">
+        </label>
+        <label>
+          Decision
+          <select name="decision">
+            <option value="approve">Approve</option>
+            <option value="changes">Request changes</option>
+            <option value="blocked">Blocked</option>
+          </select>
+        </label>
+        <label>
+          Notes
+          <textarea name="notes"></textarea>
+        </label>
+        <button type="submit">Submit custom form</button>
+      </form>
+      <script>
+        const form = document.querySelector("[data-custom-renderer-form]");
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const data = new FormData(form);
+          await window.CommentaryReview?.submitForm?.({
+            formId: "custom-renderer-security-review",
+            values: {
+              reviewerName: data.get("reviewerName"),
+              reviewerEmail: data.get("reviewerEmail"),
+              decision: data.get("decision"),
+              notes: data.get("notes")
+            },
+            renderer: {
+              name: "commentary-forms-demo-custom-renderer",
+              route: location.pathname
+            }
+          });
+        });
+      </script>
+    </main>
+  </body>
+</html>

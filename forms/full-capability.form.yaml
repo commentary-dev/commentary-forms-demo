@@ -1,0 +1,353 @@
+commentaryForm: 1
+id: launch-readiness-full-capability
+title: Launch readiness full capability
+description: Demonstrates the current native Commentary Forms field matrix for a GitHub-backed review.
+schema:
+  type: object
+  additionalProperties: false
+  required:
+    - releaseName
+    - ownerEmail
+    - launchBudget
+    - launchDate
+    - tier
+    - audience
+    - channels
+    - signoff
+    - consent
+  properties:
+    releaseName:
+      type: string
+      title: Release name
+      minLength: 2
+      maxLength: 100
+      fieldKind: text
+    summary:
+      type: string
+      title: Launch summary
+      maxLength: 800
+      fieldKind: textarea
+    ownerEmail:
+      type: string
+      title: Owner email
+      format: email
+      fieldKind: email
+    launchUrl:
+      type: string
+      title: Launch URL
+      format: uri
+      fieldKind: url
+    supportPhone:
+      type: string
+      title: Support phone
+      fieldKind: phone
+    launchBudget:
+      type: number
+      title: Launch budget
+      minimum: 0
+      maximum: 1000000
+      fieldKind: currency
+    rolloutPercent:
+      type: integer
+      title: Initial rollout percent
+      minimum: 0
+      maximum: 100
+      fieldKind: number
+    launchDate:
+      type: string
+      title: Launch date
+      format: date
+      fieldKind: date
+    readinessTime:
+      type: string
+      title: Readiness check time
+      format: time
+      fieldKind: time
+    launchWindow:
+      type: string
+      title: Launch window
+      format: date-time
+      fieldKind: datetime
+    collectsPii:
+      type: boolean
+      title: Collects PII
+      fieldKind: boolean
+    piiDetails:
+      type: string
+      title: PII details
+      maxLength: 500
+      fieldKind: textarea
+    tier:
+      type: string
+      title: Plan tier
+      enum:
+        - free
+        - pro
+        - enterprise
+      fieldKind: dropdown
+    audience:
+      type: string
+      title: Primary audience
+      enum:
+        - developers
+        - security
+        - support
+        - executives
+      fieldKind: single_select
+    channels:
+      type: array
+      title: Launch channels
+      minItems: 1
+      maxItems: 4
+      items:
+        type: string
+        enum:
+          - email
+          - in-app
+          - docs
+          - sales
+      fieldKind: multi_select
+    signoff:
+      type: string
+      title: Signoff
+      enum:
+        - approve
+        - changes
+        - blocked
+      fieldKind: radio
+    checklist:
+      type: array
+      title: Checklist
+      items:
+        type: string
+        enum:
+          - docs-ready
+          - support-ready
+          - monitoring-ready
+          - rollback-ready
+      fieldKind: checkbox_group
+    confidence:
+      type: integer
+      title: Confidence
+      minimum: 1
+      maximum: 5
+      fieldKind: rating
+    impactScale:
+      type: integer
+      title: Customer impact
+      minimum: 0
+      maximum: 10
+      fieldKind: scale
+    internalCode:
+      type: string
+      title: Internal code
+      default: launch-demo-hidden
+      fieldKind: hidden
+    readinessSummary:
+      type: string
+      title: Readiness summary
+      fieldKind: computed
+    consent:
+      type: boolean
+      title: I confirm these answers are ready for review
+      fieldKind: consent
+    evidenceUpload:
+      type: string
+      title: Evidence upload
+      fieldKind: file
+    signature:
+      type: string
+      title: Signature acknowledgement
+      fieldKind: signature_ack
+    richNotes:
+      type: string
+      title: Rich notes
+      fieldKind: rich_text
+    officeAddress:
+      type: object
+      title: Office address
+      fieldKind: address
+ui:
+  mode: one-question-at-a-time
+  fields:
+    releaseName:
+      field: releaseName
+      label: Release name
+    summary:
+      field: summary
+      label: Launch summary
+      kind: textarea
+    ownerEmail:
+      field: ownerEmail
+      label: Owner email
+      kind: email
+    launchUrl:
+      field: launchUrl
+      label: Launch URL
+      kind: url
+    supportPhone:
+      field: supportPhone
+      label: Support phone
+      kind: phone
+    launchBudget:
+      field: launchBudget
+      label: Launch budget
+      kind: currency
+    rolloutPercent:
+      field: rolloutPercent
+      label: Initial rollout percent
+      kind: number
+    launchDate:
+      field: launchDate
+      label: Launch date
+      kind: date
+    readinessTime:
+      field: readinessTime
+      label: Readiness check time
+      kind: time
+    launchWindow:
+      field: launchWindow
+      label: Launch window
+      kind: datetime
+    collectsPii:
+      field: collectsPii
+      label: Collects PII
+      kind: boolean
+    piiDetails:
+      field: piiDetails
+      label: PII details
+      kind: textarea
+      visibleWhen:
+        equals:
+          - var: collectsPii
+          - true
+      requiredWhen:
+        equals:
+          - var: collectsPii
+          - true
+    tier:
+      field: tier
+      label: Plan tier
+      kind: dropdown
+    audience:
+      field: audience
+      label: Primary audience
+      kind: single_select
+    channels:
+      field: channels
+      label: Launch channels
+      kind: multi_select
+    signoff:
+      field: signoff
+      label: Signoff
+      kind: radio
+    checklist:
+      field: checklist
+      label: Checklist
+      kind: checkbox_group
+    confidence:
+      field: confidence
+      label: Confidence
+      kind: rating
+    impactScale:
+      field: impactScale
+      label: Customer impact
+      kind: scale
+    readinessSummary:
+      field: readinessSummary
+      label: Readiness summary
+      kind: computed
+    consent:
+      field: consent
+      label: I confirm these answers are ready for review
+      kind: consent
+    evidenceUpload:
+      field: evidenceUpload
+      label: Evidence upload
+      kind: file
+    signature:
+      field: signature
+      label: Signature acknowledgement
+      kind: signature_ack
+    richNotes:
+      field: richNotes
+      label: Rich notes
+      kind: rich_text
+    officeAddress:
+      field: officeAddress
+      label: Office address
+      kind: address
+  pages:
+    - kind: page
+      id: basics
+      title: Basics
+      description: Release ownership and schedule.
+      fields:
+        - releaseName
+        - summary
+        - ownerEmail
+        - launchUrl
+        - supportPhone
+        - launchBudget
+        - rolloutPercent
+        - launchDate
+        - readinessTime
+        - launchWindow
+    - kind: page
+      id: risk
+      title: Risk and audience
+      description: Conditional PII, launch channels, and signoff.
+      fields:
+        - collectsPii
+        - piiDetails
+        - tier
+        - audience
+        - channels
+        - signoff
+        - checklist
+        - confidence
+        - impactScale
+        - readinessSummary
+        - consent
+    - kind: page
+      id: advanced
+      title: Advanced placeholders
+      description: Fields reserved for custom renderers or future native support.
+      fields:
+        - evidenceUpload
+        - signature
+        - richNotes
+        - officeAddress
+  reviewPage:
+    kind: review
+    id: review
+    title: Review launch answers
+logic:
+  required:
+    - field: piiDetails
+      when:
+        equals:
+          - var: collectsPii
+          - true
+  computed:
+    - field: readinessSummary
+      value:
+        var: signoff
+submit:
+  destinations:
+    - kind: commentary
+      enabled: true
+    - kind: export
+      enabled: true
+      config:
+        formats:
+          - json
+          - yaml
+          - csv
+agent:
+  fillable: true
+  summaryHint: Summarize launch readiness, PII risk, signoff status, and missing required fields.
+source:
+  kind: github-backed
+  path: forms/full-capability.form.yaml
+
