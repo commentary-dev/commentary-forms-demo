@@ -47,14 +47,7 @@
         ></textarea>
 
         <label for="riskScore">Risk score</label>
-        <select id="riskScore" name="riskScore" data-commentary-field="riskScore">
-          <option value="">Choose risk</option>
-          <option value="1">1 - Low</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5 - High</option>
-        </select>
+        <input id="riskScore" name="riskScore" type="number" min="1" max="5" step="1" data-commentary-field="riskScore">
 
         <label for="mitigationPlan">Mitigation plan</label>
         <textarea
