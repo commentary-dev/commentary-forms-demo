@@ -1,0 +1,54 @@
+{
+  "commentaryFormResult": 1,
+  "form": {
+    "id": "form_launch_readiness_full_capability",
+    "referenceId": "launch-readiness-full-capability",
+    "sourcePath": "forms/full-capability.form.yaml",
+    "versionId": "version_launch_readiness_full_capability",
+    "contractHash": "demo-launch-readiness-contract-hash",
+    "source": {
+      "provider": "github",
+      "owner": "commentary-dev",
+      "repo": "commentary-forms-demo",
+      "ref": "demo/full-power"
+    }
+  },
+  "submission": {
+    "id": "demo-identified",
+    "externalId": "demo-identified",
+    "submittedAt": "2026-06-18T13:00:00.000Z",
+    "origin": "git"
+  },
+  "submitter": {
+    "mode": "identified",
+    "login": "launch-reviewer"
+  },
+  "values": {
+    "releaseName": "Forms reset public demo",
+    "ownerEmail": "forms@example.com",
+    "launchBudget": 25000,
+    "launchDate": "2026-06-18",
+    "tier": "pro",
+    "audience": "developers",
+    "channels": ["docs", "in-app"],
+    "signoff": "approve",
+    "consent": true
+  },
+  "validation": {
+    "valid": true,
+    "diagnostics": []
+  },
+  "sourceContext": {
+    "kind": "markdown_review",
+    "repository": {
+      "provider": "github",
+      "owner": "commentary-dev",
+      "repo": "commentary-forms-demo"
+    },
+    "pullRequestNumber": 1,
+    "branchRef": "demo/full-power",
+    "filePath": "docs/launch-readiness.md",
+    "resultVisibility": "git_write_access"
+  },
+  "summary": "Identified result for the public Forms overview demo."
+}

@@ -1,0 +1,110 @@
+commentaryForm: 1
+id: security-review
+title: Security review
+description: Collects security readiness answers for a release review.
+schema:
+  type: object
+  additionalProperties: false
+  required:
+    - projectName
+    - ownerEmail
+    - dataClassification
+    - riskScore
+  properties:
+    projectName:
+      type: string
+      title: Project name
+      minLength: 2
+      maxLength: 80
+      fieldKind: text
+    ownerEmail:
+      type: string
+      title: Owner email
+      format: email
+      fieldKind: email
+    dataClassification:
+      type: string
+      title: Data classification
+      enum:
+        - public
+        - internal
+        - confidential
+      fieldKind: dropdown
+    handlesPii:
+      type: boolean
+      title: Handles PII
+      fieldKind: boolean
+    piiDetails:
+      type: string
+      title: PII details
+      maxLength: 400
+      fieldKind: textarea
+    riskScore:
+      type: integer
+      title: Risk score
+      minimum: 1
+      maximum: 5
+      fieldKind: rating
+    mitigationPlan:
+      type: string
+      title: Mitigation plan
+      minLength: 10
+      maxLength: 800
+      fieldKind: textarea
+ui:
+  fields:
+    projectName:
+      field: projectName
+      label: Project name
+    ownerEmail:
+      field: ownerEmail
+      label: Owner email
+      kind: email
+    dataClassification:
+      field: dataClassification
+      label: Data classification
+      kind: dropdown
+    handlesPii:
+      field: handlesPii
+      label: Handles PII
+      kind: boolean
+    piiDetails:
+      field: piiDetails
+      label: PII details
+      kind: textarea
+      visibleWhen:
+        equals:
+          - var: handlesPii
+          - true
+    riskScore:
+      field: riskScore
+      label: Risk score
+      kind: rating
+    mitigationPlan:
+      field: mitigationPlan
+      label: Mitigation plan
+      kind: textarea
+      visibleWhen:
+        gte:
+          - var: riskScore
+          - 4
+logic:
+  required:
+    - field: piiDetails
+      when:
+        equals:
+          - var: handlesPii
+          - true
+    - field: mitigationPlan
+      when:
+        gte:
+          - var: riskScore
+          - 4
+submit:
+  destinations:
+    - kind: commentary
+      enabled: true
+source:
+  kind: github-backed
+  path: forms/security-review.form.yaml
+

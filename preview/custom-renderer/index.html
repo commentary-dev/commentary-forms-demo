@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Commentary Forms custom renderer demo</title>
+    <script src="https://cdn.commentary.dev/forms-sdk/latest/commentary-forms-sdk.js"></script>
+    <style>
+      body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 760px; margin: 40px auto; padding: 0 20px; }
+      label { display: block; margin-top: 12px; font-weight: 600; }
+      input, select, textarea { display: block; width: 100%; margin-top: 4px; }
+    </style>
+  </head>
+  <body>
+    <main data-commentary-id="FormsDemo.customRenderer">
+      <h1>Custom renderer form bridge</h1>
+      <p>This page owns its UI and submits structured values through the Commentary form bridge.</p>
+      <form
+        data-custom-renderer-form="true"
+        data-commentary-form="custom-renderer-security-review"
+        data-commentary-form-src="../../forms/custom-renderer.form.yaml"
+      >
+        <label>
+          Reviewer name
+          <input name="reviewerName" data-commentary-field="reviewerName" autocomplete="name">
+        </label>
+        <label>
+          Reviewer email
+          <input name="reviewerEmail" type="email" data-commentary-field="reviewerEmail" autocomplete="email">
+        </label>
+        <label>
+          Decision
+          <select name="decision" data-commentary-field="decision">
+            <option value="approve">Approve</option>
+            <option value="changes">Request changes</option>
+            <option value="blocked">Blocked</option>
+          </select>
+        </label>
+        <label>
+          Notes
+          <textarea name="notes" data-commentary-field="notes"></textarea>
+        </label>
+        <button type="submit">Submit custom form</button>
+      </form>
+    </main>
+  </body>
+</html>

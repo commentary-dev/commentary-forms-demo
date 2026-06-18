@@ -1,0 +1,56 @@
+commentaryForm: 1
+id: dedicated-fillout-demo
+title: Dedicated fillout demo
+description: Source contract for minimal fillout mode with anonymous or identified replies.
+schema:
+  type: object
+  additionalProperties: false
+  required:
+    - requester
+    - priority
+    - followUpAllowed
+  properties:
+    requester:
+      type: string
+      title: Requester
+      minLength: 2
+      fieldKind: text
+    priority:
+      type: string
+      title: Priority
+      enum:
+        - normal
+        - urgent
+      fieldKind: radio
+    notes:
+      type: string
+      title: Notes
+      fieldKind: textarea
+    followUpAllowed:
+      type: boolean
+      title: Follow-up allowed
+      fieldKind: consent
+ui:
+  fields:
+    requester:
+      field: requester
+      label: Requester
+    priority:
+      field: priority
+      label: Priority
+      kind: radio
+    notes:
+      field: notes
+      label: Notes
+      kind: textarea
+    followUpAllowed:
+      field: followUpAllowed
+      label: Follow-up allowed
+      kind: consent
+submit:
+  destinations:
+    - kind: commentary
+      enabled: true
+source:
+  kind: dedicated-fillout
+  path: forms/dedicated-fillout.form.yml
