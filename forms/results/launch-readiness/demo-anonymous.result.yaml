@@ -1,0 +1,32 @@
+commentaryFormResult: 1
+form:
+  id: form_dedicated_fillout_demo
+  referenceId: dedicated-fillout-demo
+  sourcePath: forms/dedicated-fillout.form.yml
+  versionId: version_dedicated_fillout_demo
+  contractHash: demo-dedicated-fillout-contract-hash
+  source:
+    provider: github
+    owner: commentary-dev
+    repo: commentary-forms-demo
+    ref: demo/full-power
+submission:
+  id: demo-anonymous
+  externalId: demo-anonymous
+  submittedAt: "2026-06-18T13:15:00.000Z"
+  origin: git
+submitter:
+  mode: anonymous
+values:
+  requester: Anonymous respondent
+  priority: normal
+  notes: Fillout mode keeps source editing out of the respondent path.
+  followUpAllowed: true
+validation:
+  valid: true
+  diagnostics: []
+sourceContext:
+  kind: dedicated_fillout
+  filloutLinkId: demo-fillout-link
+  resultVisibility: dedicated_fillout_owner
+summary: Anonymous result for the dedicated fillout demo.

@@ -1,0 +1,38 @@
+{
+  "commentaryForm": 1,
+  "id": "results-sync-readiness",
+  "title": "Results sync readiness",
+  "description": "JSON contract for result collection and git sync demos.",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["reviewName", "syncDecision"],
+    "properties": {
+      "reviewName": { "type": "string", "title": "Review name", "minLength": 2, "fieldKind": "text" },
+      "syncDecision": {
+        "type": "string",
+        "title": "Sync decision",
+        "enum": ["ready", "needs-review", "blocked"],
+        "fieldKind": "dropdown"
+      },
+      "diagnostics": { "type": "string", "title": "Diagnostics", "fieldKind": "textarea" }
+    }
+  },
+  "ui": {
+    "fields": {
+      "reviewName": { "field": "reviewName", "label": "Review name" },
+      "syncDecision": { "field": "syncDecision", "label": "Sync decision", "kind": "dropdown" },
+      "diagnostics": { "field": "diagnostics", "label": "Diagnostics", "kind": "textarea" }
+    }
+  },
+  "submit": {
+    "destinations": [
+      { "kind": "commentary", "enabled": true },
+      { "kind": "github-branch", "enabled": false }
+    ]
+  },
+  "source": {
+    "kind": "github-backed",
+    "path": "forms/results-sync.form.json"
+  }
+}
