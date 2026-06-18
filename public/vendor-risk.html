@@ -46,10 +46,27 @@
           data-commentary-visible-when='{"equals":[{"var":"handlesPii"},true]}'
         ></textarea>
 
+        <label for="riskScore">Risk score</label>
+        <select id="riskScore" name="riskScore" data-commentary-field="riskScore">
+          <option value="">Choose risk</option>
+          <option value="1">1 - Low</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 - High</option>
+        </select>
+
+        <label for="mitigationPlan">Mitigation plan</label>
+        <textarea
+          id="mitigationPlan"
+          name="mitigationPlan"
+          data-commentary-field="mitigationPlan"
+          data-commentary-visible-when='{"gte":[{"var":"riskScore"},4]}'
+        ></textarea>
+
         <button type="submit" onclick="window.__blockedInlineHandler = true">Submit security review</button>
       </form>
       <script>window.__blockedScript = true;</script>
     </main>
   </body>
 </html>
-

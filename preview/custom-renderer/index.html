@@ -12,19 +12,23 @@
   <body>
     <main data-commentary-id="FormsDemo.customRenderer">
       <h1>Custom renderer form bridge</h1>
-      <p>This page owns its UI and submits structured values through the Commentary Review SDK.</p>
-      <form data-custom-renderer-form="true">
+      <p>This page owns its UI and submits structured values through the Commentary form bridge.</p>
+      <form
+        data-custom-renderer-form="true"
+        data-commentary-form="custom-renderer-security-review"
+        data-commentary-form-src="../../forms/custom-renderer.form.yaml"
+      >
         <label>
           Reviewer name
-          <input name="reviewerName" autocomplete="name">
+          <input name="reviewerName" data-commentary-field="reviewerName" autocomplete="name">
         </label>
         <label>
           Reviewer email
-          <input name="reviewerEmail" type="email" autocomplete="email">
+          <input name="reviewerEmail" type="email" data-commentary-field="reviewerEmail" autocomplete="email">
         </label>
         <label>
           Decision
-          <select name="decision">
+          <select name="decision" data-commentary-field="decision">
             <option value="approve">Approve</option>
             <option value="changes">Request changes</option>
             <option value="blocked">Blocked</option>
@@ -32,30 +36,10 @@
         </label>
         <label>
           Notes
-          <textarea name="notes"></textarea>
+          <textarea name="notes" data-commentary-field="notes"></textarea>
         </label>
         <button type="submit">Submit custom form</button>
       </form>
-      <script>
-        const form = document.querySelector("[data-custom-renderer-form]");
-        form.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          const data = new FormData(form);
-          await window.CommentaryForms?.submitForm?.({
-            formId: "custom-renderer-security-review",
-            values: {
-              reviewerName: data.get("reviewerName"),
-              reviewerEmail: data.get("reviewerEmail"),
-              decision: data.get("decision"),
-              notes: data.get("notes")
-            },
-            renderer: {
-              name: "commentary-forms-demo-custom-renderer",
-              route: location.pathname
-            }
-          });
-        });
-      </script>
     </main>
   </body>
 </html>
