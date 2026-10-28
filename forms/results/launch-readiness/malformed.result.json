@@ -1,0 +1,12 @@
+{
+  "commentaryFormResult": 1,
+  "form": {
+    "referenceId": "launch-readiness-full-capability"
+  },
+  "submission": {
+    "externalId": "demo-malformed"
+  },
+  "validation": {
+    "diagnostics": "not an array"
+  }
+}

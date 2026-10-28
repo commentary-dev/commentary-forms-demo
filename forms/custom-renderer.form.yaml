@@ -1,0 +1,59 @@
+commentaryForm: 1
+id: custom-renderer-security-review
+title: Custom renderer security review
+description: Contract used by the Live Preview Review custom renderer bridge demo.
+schema:
+  type: object
+  additionalProperties: false
+  required:
+    - reviewerName
+    - reviewerEmail
+    - decision
+  properties:
+    reviewerName:
+      type: string
+      title: Reviewer name
+      minLength: 2
+      fieldKind: text
+    reviewerEmail:
+      type: string
+      title: Reviewer email
+      format: email
+      fieldKind: email
+    decision:
+      type: string
+      title: Decision
+      enum:
+        - approve
+        - changes
+        - blocked
+      fieldKind: dropdown
+    notes:
+      type: string
+      title: Notes
+      maxLength: 1000
+      fieldKind: textarea
+ui:
+  fields:
+    reviewerName:
+      field: reviewerName
+      label: Reviewer name
+    reviewerEmail:
+      field: reviewerEmail
+      label: Reviewer email
+      kind: email
+    decision:
+      field: decision
+      label: Decision
+      kind: dropdown
+    notes:
+      field: notes
+      label: Notes
+      kind: textarea
+submit:
+  destinations:
+    - kind: commentary
+      enabled: true
+source:
+  kind: custom-renderer
+  path: forms/custom-renderer.form.yaml

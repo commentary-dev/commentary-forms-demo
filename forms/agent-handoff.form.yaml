@@ -1,0 +1,70 @@
+commentaryForm: 1
+id: agent-handoff
+title: Agent handoff
+description: Structured answers intended for review agents and export flows.
+schema:
+  type: object
+  additionalProperties: false
+  required:
+    - decision
+    - owner
+    - nextStep
+  properties:
+    decision:
+      type: string
+      title: Decision
+      enum:
+        - approve
+        - changes-requested
+        - blocked
+      fieldKind: radio
+    owner:
+      type: string
+      title: Owner
+      minLength: 2
+      fieldKind: text
+    nextStep:
+      type: string
+      title: Next step
+      minLength: 5
+      maxLength: 500
+      fieldKind: textarea
+    dueDate:
+      type: string
+      title: Due date
+      format: date
+      fieldKind: date
+ui:
+  fields:
+    decision:
+      field: decision
+      label: Decision
+      kind: radio
+    owner:
+      field: owner
+      label: Owner
+    nextStep:
+      field: nextStep
+      label: Next step
+      kind: textarea
+    dueDate:
+      field: dueDate
+      label: Due date
+      kind: date
+submit:
+  destinations:
+    - kind: commentary
+      enabled: true
+    - kind: export
+      enabled: true
+      config:
+        formats:
+          - markdown
+          - json
+agent:
+  fillable: true
+  summaryHint: Return decision, owner, due date, and next step as a concise review handoff.
+source:
+  kind: github-backed
+  path: forms/agent-handoff.form.yaml
+
